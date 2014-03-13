@@ -1,0 +1,95 @@
+<head>
+  <title>notatki</title>
+</head>
+
+<body>
+	{{> editNoteModal}}
+	<div class="container">
+		<div class="navbar">
+		<div class="navbar-inner">
+		<a class="brand" href="#"><i class="icon-th-list"></i> Notatki</a>
+		<ul class="nav">
+			<li>{{loginButtons}}</li>
+		</ul>
+		</div>
+		</div
+	</div>
+	<div class="container">
+		{{#if currentUser}}
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Poprawnie zalogowany!</strong>
+		</div>
+		{{/if}}
+		<div class="hero-unit">
+		<h1>Witaj!</h1>
+		<p>Zaloguj się i twórz swoje prywatne notatki!</p>
+		</div>
+	</div>
+	<div class="container">
+    <div class="row">
+    	<div class="span4">
+    	{{#if currentUser}}
+    		{{> addNote}}
+    	{{/if}}
+    	</div>
+    	<div class="span8">
+    	<div class="main">
+
+    	</div>
+    	{{#if currentUser}}
+    		{{> notes}}
+    	{{/if}}
+    	</div>
+    </div>
+    </div>
+</body>
+
+<template name="notes">
+<div id="notes">
+	<table class="table table-hover table-striped table-bordered">
+	<thead>
+	<tr class="info">
+		<th>Notatka</th>
+		<th>Akcja</th>
+	</tr>
+	</thead>
+	{{#each notes}}
+		<tr>
+		<td class="noteTd">{{note}}</td>
+		<td>
+			<button type="submit" class="btn btn-warning editNoteBtn">Edytuj</button>
+			<button type="submit" class="btn btn-danger deleteNoteBtn">Usuń</button>
+		</td>
+		</tr>
+	{{/each}}
+	</table>
+</div>
+</template>
+
+<template name="addNote">
+	<div id="adding">
+	<div class="form-search">
+		<h2>Dodaj notatkę</h2>
+    	<textarea rows="3" id="addNoteTxt"></textarea>
+    	<button type="submit" class="btn btn-primary" id="addNoteBtn">Dodaj</button>
+    </div>
+	</div>
+</template>
+<template name="editNoteModal">
+{{#if show}}
+	<div class="modal">
+	<div class="modal-header">
+	<button type="button" class="close exit" aria-hidden="true">&times;</button>
+	<h3>Edytuj notatkę</h3>
+	</div>
+	<div class="modal-body">
+	<textarea rows="3" id="editNoteName">{{src.note}}</textarea>
+	</div>
+	<div class="modal-footer">
+	<a href="#" class="btn exit">Close</a>
+	<a href="#" class="btn btn-primary saveNoteBtn">Save changes</a>
+	</div>
+	</div>
+    {{/if}}
+</template>
